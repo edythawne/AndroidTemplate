@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- DarkTheme -->
+    <array name="app_theme">
+        <item>Default</item>
+        <item>Claro</item>
+        <item>Obscuro</item>
+    </array>
+
+    <!-- Topics -->
+    <array name="topics">
+        <item>x</item>
+    </array>
+
+    <!-- Topics Description -->
+    <array name="topics_desc">
+        <item>xxxxx</item>
+    </array>
+
+</resources>

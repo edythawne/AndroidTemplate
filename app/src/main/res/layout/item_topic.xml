@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="m"
+            type="edy.app.change.models.TopicModel" />
+
+        <variable
+            name="h"
+            type="edy.app.change.adapters.base.HandlerAdapter" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        style="@style/SelectableItemStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{(v) -> h.navigate(v, m.nav1)}"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_padding">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/isec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="@dimen/gutter_vertical"
+                android:layout_marginRight="@dimen/gutter_vertical"
+                android:layout_toStartOf="@id/iimg"
+                android:layout_toLeftOf="@id/iimg"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/itit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/gutter_vertical"
+                    android:text="@{m.title}"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/ides"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{m.description}" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <ImageView
+                android:id="@+id/iimg"
+                android:layout_width="@dimen/img_width_height"
+                android:layout_height="@dimen/img_width_height"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitXY"
+                bind:resourceImage="@{m.drawable}" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_size"
+            android:background="@drawable/ic_divider" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

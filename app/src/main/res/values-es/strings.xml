@@ -1,0 +1,27 @@
+<resources>
+    <!-- App Name-->
+    <string name="app_name">Buscador de Números</string>
+
+    <!-- About Us -->
+    <string name="about_objetive">Objetivo</string>
+    <string name="about_app_info">Información de la Aplicación</string>
+    <string name="about_company_description">Desarrollo de Aplicaciones Móviles para la solución de problemas cotidianos.</string>
+
+    <!-- Settings Preferences -->
+    <string name="pref_theme">Tema</string>
+    <string name="pref_theme_summary">Seleccione Tema</string>
+
+    <!-- Warning -->
+    <string name="war_number_request">Número Requerido</string>
+
+    <!-- Buttons Actions -->
+    <string name="start">Buscar</string>
+
+    <!-- App Titles (Toolbar) -->
+    <string name="nav_drawer_open">abrir</string>
+    <string name="nav_drawer_close">cerrar</string>
+    <string name="nav_about">Acerca de Nosotros</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_legal">Aviso Legal</string>
+
+</resources>

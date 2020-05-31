@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--
+        ******************************************
+            COLORES DEL TEMA POR DEFECTO (WHITE)
+        ******************************************
+    -->
+
+    <!-- Colores Primarios -->
+    <color name="colorPrimary">#FFFFFFFF</color>
+    <color name="colorPrimaryVariant">#000000</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+
+    <!-- Color Primario Dark -->
+    <color name="colorPrimaryDark">#FFFFFFFF</color>
+    <color name="colorPrimaryDarkVariant">#8a000000</color>
+
+    <!-- Colores Secundarios -->
+    <color name="colorSecondary">#283593</color>
+    <color name="colorSecondaryVariant">#0D47A1</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+
+    <!-- Colores de Acento -->
+    <color name="colorAccent">#1A237E</color>
+
+    <!-- Colores de Fondo-->
+    <color name="colorBackground">#FFFFFFFF</color>
+    <color name="colorOnBackground">#212121</color>
+
+    <!-- Color de Superficies -->
+    <color name="colorSurface">#FFFFFFFF</color>
+    <color name="colorOnSurface">#212121</color>
+
+    <!-- Color de Errores-->
+    <color name="colorError">#C51162</color>
+    <color name="colorOnError">#FFFFFF</color>
+
+    <!-- Colores de Texto -->
+    <color name="text_color_primary">#212121</color>
+    <color name="text_color_secondary">#FFFFFF</color>
+
+    <!-- NavigationView Color -->
+    <color name="colorNavigationPrimary">#4527A0</color>
+    <color name="colorNavigationControlHighlight">#4000695C</color>
+
+    <!-- CursorTextInputLayout -->
+    <color name="colorHintText">#212121</color>
+    <color name="colorTextColorHint">#000000</color>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#212121</color>
+
+    <!-- TextInputLayout -->
+    <color name="colorBoxStrokeColor">#1A237E</color>
+    <color name="colorBoxBackgroundColor">#FFFFFFFF</color>
+
+    <!-- Color Transparent -->
+    <color name="colorTransparent">#80000000</color>
+
+    <!-- Color Collapsing Toolbar -->
+    <color name="colorCollapsePrimary">#004D40</color>
+    <color name="colorCollapseDarkPrimary">#014035</color>
+
+    <!-- Screens background color-->
+    <color name="bg_screen1">#C62828</color>
+    <color name="bg_screen2">#0277BD</color>
+    <color name="bg_screen3">#00695C</color>
+    <color name="bg_screen4">#424242</color>
+    <color name="bg_screen5">#006064</color>
+    <color name="bg_screen6">#880E4F</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">#C62828</color>
+    <color name="dot_dark_screen2">#0277BD</color>
+    <color name="dot_dark_screen3">#00695C</color>
+    <color name="dot_dark_screen4">#424242</color>
+    <color name="dot_dark_screen5">#006064</color>
+    <color name="dot_dark_screen6">#880E4F</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">#F8758F</color>
+    <color name="dot_light_screen2">#4C9CCC</color>
+    <color name="dot_light_screen3">#03A894</color>
+    <color name="dot_light_screen4">#DCBCB2</color>
+    <color name="dot_light_screen5">#16959A</color>
+    <color name="dot_light_screen6">#A5487A</color>
+
+</resources>

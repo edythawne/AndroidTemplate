@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- DarkTheme -->
+    <array name="app_theme">
+        <item>Default</item>
+        <item>Light</item>
+        <item>Dark</item>
+    </array>
+
+    <!-- Topics -->
+    <array name="topics">
+        <item>x</item>
+    </array>
+
+    <!-- Drawables -->
+    <integer-array name="topics_src">
+        <item>@drawable/ic_about</item>
+    </integer-array>
+
+    <!-- Destination -->
+    <integer-array name="topics_destiny">
+        <item>@id/action_fhome_to_fabout</item>
+    </integer-array>
+
+    <!-- Topics Description -->
+    <array name="topics_desc">
+        <item>xxxxx</item>
+    </array>
+
+</resources>

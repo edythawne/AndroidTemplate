@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- No Size -->
+    <dimen name="no_width">0dp</dimen>
+    <dimen name="no_height">0dp</dimen>
+    <dimen name="divider_size">1dp</dimen>
+
+    <!-- Margin Size, https://material.io/design/layout/responsive-layout-grid.html#columns-gutters-margins -->
+    <dimen name="margin_padding">2dp</dimen>
+    <dimen name="margin_padding_left">8dp</dimen>
+    <dimen name="margin_padding_right">8dp</dimen>
+    <dimen name="gutter_vertical">8dp</dimen>
+    <dimen name="gutter_horizontal">4dp</dimen>
+
+    <!-- Launcher Icon Size, https://developer.android.com/guide/practices/ui_guidelines/icon_design_launcher.html#size -->
+    <dimen name="launcher_icon_size">@dimen/standard_touch_size</dimen>
+
+    <!-- Touch Target Size, https://material.io/guidelines/layout/metrics-keylines.html#metrics-keylines-touch-target-size-->
+    <dimen name="standard_touch_size">48dp</dimen>
+
+    <!-- Toolbar, 4 dp baseline, https://material.io/guidelines/layout/metrics-keylines.html#metrics-keylines-baseline-grids -->
+    <dimen name="toolbar_margin_size">4dp</dimen>
+    <dimen name="toolbar_icon_size">24dp</dimen>
+    <dimen name="toolbar_default_height">56dp</dimen>
+    <dimen name="appbar_elevation">4dp</dimen>
+    <dimen name="appbar_header_height">240dp</dimen>
+    <dimen name="activity_margin_content">12dp</dimen>
+
+    <!-- Font sizes, https://material.io/guidelines/style/typography.html#typography-typeface -->
+    <dimen name="text_size_micro">12sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_xlarge">34sp</dimen>
+    <dimen name="text_size_xxlarge">45sp</dimen>
+    <dimen name="text_size_xxxlarge">56sp</dimen>
+
+    <!-- NavigationDrawer,  https://material.io/design/components/navigation-drawer.html#specs -->
+    <dimen name="navigation_header_height">180dp</dimen>
+    <dimen name="navigation_header_padding">16dp</dimen>
+    <dimen name="navigation_drawer_width">280dp</dimen>
+    <dimen name="navigation_drawer_icon">64dp</dimen>
+    <dimen name="navigation_drawer_max_width">315dp</dimen>
+    <dimen name="navigation_drawer_elevation">0dp</dimen>
+    <dimen name="navigation_drawer_item_icon_padding">14dp</dimen>
+    <dimen name="navigation_drawer_item_horizontal_padding">22dp</dimen>
+
+    <!-- CardView, https://material.io/design/components/cards.html#specs -->
+    <dimen name="cardview_spacing">8dp</dimen>
+    <dimen name="cardview_elevation">3dp</dimen>
+    <dimen name="cardview_margin">4dp</dimen>
+    <dimen name="cardview_corner_radius">6dp</dimen>
+    <dimen name="cardview_checked_icon_size">24dp</dimen>
+    <dimen name="cardviewchecked_icon_margin">8dp</dimen>
+    <dimen name="cardview_dragged_z">5dp</dimen>
+    <dimen name="cardview_height">165dp</dimen>
+
+    <!-- Dialog, https://material.io/design/components/dialogs.html#theming-->
+    <dimen name="dialog_corner_radius">16dp</dimen>
+
+    <!-- SnackBar -->
+    <dimen name="design_snackbar_background_corner_radius" tools:override="true">4dp</dimen>
+
+    <!-- RecyclerView Item Image Height -->
+    <dimen name="recycler_image_height">140dp</dimen>
+
+    <!-- Slide Dimen -->
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="dots_height">40dp</dimen>
+    <dimen name="dots_margin_bottom">20dp</dimen>
+    <dimen name="img_width_height">115dp</dimen>
+    <dimen name="slide_title">27sp</dimen>
+    <dimen name="slide_desc">16sp</dimen>
+    <dimen name="desc_padding">40dp</dimen>
+
+    <!-- My Chip Size -->
+    <dimen name="chip_size">60dp</dimen>
+
+</resources>

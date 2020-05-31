@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fhome">
+
+    <fragment
+        android:id="@+id/fhome"
+        android:name="edy.app.numbersearch.views.fragments.HomeFragment"
+        android:label="@string/app_name">
+
+        <action
+            android:id="@+id/action_fhome_to_fsettings"
+            app:destination="@id/fsettings"
+            app:enterAnim="@anim/slide_up" />
+
+        <action
+            android:id="@+id/action_fhome_to_fabout"
+            app:destination="@id/fabout" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/fsettings"
+        android:name="edy.app.change.views.settings.SettingsFragment"
+        android:label="@string/nav_settings" />
+
+    <fragment
+        android:id="@+id/fabout"
+        android:name="edy.app.change.settings.AboutFragment"
+        android:label="@string/nav_about">
+
+        <action
+            android:id="@+id/action_fabout_to_flegal"
+            app:destination="@id/flegal"
+            app:enterAnim="@anim/slide_up" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/flegal"
+        android:name="edy.app.change.views.settings.LegalFragment"
+        android:label="@string/nav_legal" />
+
+</navigation>

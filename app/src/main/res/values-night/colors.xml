@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--
+        ******************************************
+            COLORES DEL TEMA POR DEFECTO (DARK)
+        ******************************************
+    -->
+
+    <!-- Colores Primarios -->
+    <color name="colorPrimary">#1F1B24</color>
+    <color name="colorPrimaryVariant">#FFFFFF</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+
+    <!-- Color Primario Dark -->
+    <color name="colorPrimaryDark">#1F1B24</color>
+    <color name="colorPrimaryDarkVariant">#8a000000</color>
+
+    <!-- Colores Secundarios -->
+    <color name="colorSecondary">#00695C</color>
+    <color name="colorSecondaryVariant">#00838F</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+
+    <!-- Colores de Acento -->
+    <color name="colorAccent">#00695C</color>
+
+    <!-- Colores de Fondo-->
+    <color name="colorBackground">#1F1B24</color>
+    <color name="colorOnBackground">#FFFFFF</color>
+
+    <!-- Color de Superficies -->
+    <color name="colorSurface">#28232E</color>
+    <color name="colorOnSurface">#FFFFFF</color>
+
+    <!-- Color de Errores-->
+    <color name="colorError">#EF9A9A</color>
+    <color name="colorOnError">#FFEBEE</color>
+
+    <!-- Colores de Texto -->
+    <color name="text_color_primary">#FFFFFFFF</color>
+    <color name="text_color_secondary">#1F1B24</color>
+
+    <!-- NavigationView Color -->
+    <color name="colorNavigationPrimary">#EEEEEE</color>
+    <color name="colorNavigationControlHighlight">#4084FFFF</color>
+
+    <!-- CursorTextInputLayout -->
+    <color name="colorHintText">#FAFAFA</color>
+    <color name="colorTextColorHint">#FFFFFF</color>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#F5F5F5</color>
+
+    <!-- TextInputLayout -->
+    <color name="colorBoxStrokeColor">#00796B</color>
+    <color name="colorBoxBackgroundColor">#28232E</color>
+
+</resources>
