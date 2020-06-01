@@ -1,6 +1,6 @@
 <resources>
     <!-- App Name-->
-    <string name="app_name">Buscador de Números</string>
+    <string name="app_name">Template</string>
 
     <!-- About Us -->
     <string name="about_objetive">Objetivo</string>

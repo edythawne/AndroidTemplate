@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/fhome"
-        android:name="edy.app.numbersearch.views.fragments.HomeFragment"
+        android:name="edy.app.change.views.fragments.HomeFragment"
         android:label="@string/app_name">
 
         <action
@@ -17,6 +17,7 @@
         <action
             android:id="@+id/action_fhome_to_fabout"
             app:destination="@id/fabout" />
+
     </fragment>
 
 

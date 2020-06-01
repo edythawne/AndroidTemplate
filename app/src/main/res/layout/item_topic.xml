@@ -33,6 +33,8 @@
                 android:layout_centerInParent="true"
                 android:layout_marginEnd="@dimen/gutter_vertical"
                 android:layout_marginRight="@dimen/gutter_vertical"
+                android:layout_marginStart="@dimen/gutter_vertical"
+                android:layout_marginLeft="@dimen/gutter_vertical"
                 android:layout_toStartOf="@id/iimg"
                 android:layout_toLeftOf="@id/iimg"
                 android:orientation="vertical">

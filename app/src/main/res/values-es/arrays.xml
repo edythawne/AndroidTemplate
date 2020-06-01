@@ -8,14 +8,9 @@
         <item>Obscuro</item>
     </array>
 
-    <!-- Topics -->
-    <array name="topics">
-        <item>x</item>
-    </array>
-
     <!-- Topics Description -->
     <array name="topics_desc">
-        <item>xxxxx</item>
+        <item>¡Hola Estimado Usuario! Te invito a conocer nuestro trabajo.</item>
     </array>
 
 </resources>

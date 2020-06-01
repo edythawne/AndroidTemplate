@@ -10,7 +10,7 @@
 
     <!-- Topics -->
     <array name="topics">
-        <item>x</item>
+        <item>@string/nav_about</item>
     </array>
 
     <!-- Drawables -->
@@ -25,7 +25,7 @@
 
     <!-- Topics Description -->
     <array name="topics_desc">
-        <item>xxxxx</item>
+        <item>Hello Dear User! I invite you to meet us.</item>
     </array>
 
 </resources>
