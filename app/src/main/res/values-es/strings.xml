@@ -6,6 +6,7 @@
     <string name="about_objetive">Objetivo</string>
     <string name="about_app_info">Información de la Aplicación</string>
     <string name="about_company_description">Desarrollo de Aplicaciones Móviles para la solución de problemas cotidianos.</string>
+    <string name="about_msg">¡Hola Estimado Usuario! Te invito a conocer nuestro trabajo.</string>
 
     <!-- Settings Preferences -->
     <string name="pref_theme">Tema</string>
@@ -16,6 +17,7 @@
 
     <!-- Buttons Actions -->
     <string name="start">Buscar</string>
+    <string name="internet_not_access">Sin Conexión a Internet</string>
 
     <!-- App Titles (Toolbar) -->
     <string name="nav_drawer_open">abrir</string>

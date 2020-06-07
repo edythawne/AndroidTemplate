@@ -6,10 +6,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import edy.app.change.models.TopicModel
 
-class ViewModel(val mState: SavedStateHandle) : ViewModel() {
+class AppViewModel(val mState: SavedStateHandle) : ViewModel() {
 
     // TAG Variable
-    private val TAG: String = ViewModel::class.java.name
+    private val TAG: String = AppViewModel::class.java.name
 
     // LiveData
     private val topicData: MutableLiveData<ArrayList<TopicModel>> by lazy { MutableLiveData<ArrayList<TopicModel>>() }

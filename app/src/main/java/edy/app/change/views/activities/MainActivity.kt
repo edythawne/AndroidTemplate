@@ -6,9 +6,11 @@ package edy.app.change.views.activities
 import android.os.Bundle
 import android.util.Log
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.novoda.merlin.*
 import edy.app.change.R
 import edy.app.change.databinding.ActivityMainBinding
+import edy.app.change.viewmodels.AppViewModel
 import edy.app.change.views.BaseApplication
 import edy.app.tools.helpers.NotifiersHelper
 
@@ -23,6 +25,9 @@ class MainActivity : BaseApplication(), Connectable, Disconnectable, Bindable {
 
     // Variables
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: AppViewModel by lazy {
+        ViewModelProvider(this@MainActivity).get(AppViewModel::class.java)
+    }
 
     /**
      * onCreate

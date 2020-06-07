@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import edy.app.change.R
@@ -17,7 +17,7 @@ import edy.app.change.adapters.list.GridLayoutAdapter
 import edy.app.change.adapters.list.TopicAdapter
 import edy.app.change.databinding.FragmentHomeBinding
 import edy.app.change.models.TopicModel
-import edy.app.change.viewmodels.ViewModel
+import edy.app.change.viewmodels.AppViewModel
 
 class HomeFragment : Fragment() {
 
@@ -26,9 +26,7 @@ class HomeFragment : Fragment() {
 
     // Variables
     private lateinit var binding: FragmentHomeBinding
-    private val viewModel: ViewModel by lazy {
-        ViewModelProvider(this@HomeFragment).get(ViewModel::class.java)
-    }
+    private val viewModel: AppViewModel by activityViewModels()
 
     /**
      * onCreateView

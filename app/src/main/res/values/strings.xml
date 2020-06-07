@@ -16,6 +16,7 @@
     <string name="about_objetive">Objetive</string>
     <string name="about_app_info">App Information</string>
     <string name="about_company_description">Development of Mobile Applications for solving everyday problems.</string>
+    <string name="about_msg">Hello Dear User! I invite you to meet us.</string>
 
     <!-- Settings Preferences -->
     <string name="pref_theme">Theme</string>
@@ -29,6 +30,7 @@
 
     <!-- Buttons Actions -->
     <string name="start">Start</string>
+    <string name="internet_not_access">No Internet Connection</string>
 
     <!-- App Titles (Toolbar) -->
     <string name="nav_drawer_open">open</string>

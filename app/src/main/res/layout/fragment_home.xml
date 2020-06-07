@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="edy.app.change.viewmodels.ViewModel" />
+            type="edy.app.change.viewmodels.AppViewModel" />
 
     </data>
 

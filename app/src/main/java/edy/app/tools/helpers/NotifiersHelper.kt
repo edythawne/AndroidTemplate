@@ -75,11 +75,10 @@ object NotifiersHelper {
         this.view.layoutParams = params
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            this.view.background =
-                ContextCompat.getDrawable(
-                    context,
-                    com.google.android.material.R.drawable.design_snackbar_background
-                )
+            this.view.background = ContextCompat.getDrawable(
+                context,
+                com.google.android.material.R.drawable.design_snackbar_background
+            )
         } else {
             this.view.setBackgroundDrawable(
                 ContextCompat.getDrawable(
