@@ -4,6 +4,7 @@ package edy.app.change.views.activities
 //import edy.app.tools.advertensing.AdsBanner
 //import edy.app.tools.advertensing.AdsInterstitial
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -19,15 +20,15 @@ class MainActivity : BaseApplication(), Connectable, Disconnectable, Bindable {
     // TAG
     private val TAG: String = MainActivity::class.java.name
 
-    // Ads Variables
-    //private lateinit var banner: AdsBanner
-    //private lateinit var interstitial: AdsInterstitial
-
     // Variables
     private lateinit var binding: ActivityMainBinding
     private val viewModel: AppViewModel by lazy {
         ViewModelProvider(this@MainActivity).get(AppViewModel::class.java)
     }
+
+    // Ads Variables
+    //private lateinit var banner: AdsBanner
+    //private lateinit var interstitial: AdsInterstitial
 
     /**
      * onCreate
@@ -40,20 +41,43 @@ class MainActivity : BaseApplication(), Connectable, Disconnectable, Bindable {
         binding.lifecycleOwner = this
 
         // Init Components
-        initAds()
+        configAds()
+    }
+
+    /**
+     * onRestoreInstanceState
+     * @param savedInstanceState Bundle
+     */
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+    }
+
+    /**
+     * onSaveInstanceState
+     * @param outState Bundle
+     * @param outPersistentState PersistableBundle
+     */
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
     }
 
     /**
      * onResume
      */
     override fun onResume() {
-        Log.w(TAG, "onResume()")
         super.onResume()
+        registerBindable(this)
         registerConnectable(this)
         registerDisconnectable(this)
-        registerBindable(this)
 
         //banner.adView.resume()
+    }
+
+    /**
+     * onPause
+     */
+    override fun onPause() {
+        super.onPause()
     }
 
     /**
@@ -75,8 +99,8 @@ class MainActivity : BaseApplication(), Connectable, Disconnectable, Bindable {
     }
 
     /**
-     * Tipo de Conexion a Internet
-     * @param networkStatus [ERROR : NetworkStatus]
+     * Connection Type
+     * @param networkStatus NetworkStatus
      */
     override fun onBind(networkStatus: NetworkStatus?) {
         if (!networkStatus!!.isAvailable) {
@@ -89,14 +113,8 @@ class MainActivity : BaseApplication(), Connectable, Disconnectable, Bindable {
      */
     override fun onConnect() {
         try {
-            /**binding.ads.visibility = View.VISIBLE
-
-            val r = Runnable {
-            interstitial.init(getString(R.string.admob_intersticial))
-            banner.init(getString(R.string.admob_banner))
-            binding.ads.addView(banner.adView)
-            }
-            runOnUiThread(r)**/
+            viewModel.internetAccess.postValue(true)
+            // val r = Runnable { configAdView() } runOnUiThread(r)
         } catch (ex: Exception) {
             Log.w(TAG, "onConnect: $ex")
         }
@@ -106,24 +124,35 @@ class MainActivity : BaseApplication(), Connectable, Disconnectable, Bindable {
      * Sin acceso a internet
      */
     override fun onDisconnect() {
-        val r = Runnable {
-            NotifiersHelper.snackbar(
-                this@MainActivity,
-                getString(R.string.app_name),
-                NotifiersHelper.SNACK_LENGTH_LONG
-            )
+        try {
+            val r = Runnable {
+                viewModel.internetAccess.postValue(false)
+                NotifiersHelper.snackbar(this, getString(R.string.internet_not_access), NotifiersHelper.SNACK_LENGTH_LONG)
+            }
+            runOnUiThread(r)
+        } catch (ex: Exception) {
+            Log.w(TAG, "onDisconnect [Error]: $ex")
         }
-
-        runOnUiThread(r)
     }
 
     /**
      * initMobileAds
      */
-    private fun initAds() {
-        /**MobileAds.initialize(this@MainActivity) {}
-        banner = AdsBanner(this@MainActivity)
-        interstitial = AdsInterstitial(this@MainActivity)**/
+    private fun configAds() {
+        //MobileAds.initialize(this@MainActivity) {}
+        //banner = AdsBanner(this@MainActivity)
+    }
+
+    /**
+     * configAdView
+     */
+    private fun configAdView() {
+        /**
+        banner.init(getString(com.novoda.merlin.R.string.key_adview))
+        binding.ads.apply {
+        visibility = View.VISIBLE
+        addView(banner.adView)
+        } **/
     }
 
 }

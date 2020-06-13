@@ -1,4 +1,4 @@
-package edy.app.change.settings
+package edy.app.change.views.settings
 
 import android.content.Intent
 import android.net.Uri
@@ -22,26 +22,68 @@ class AboutFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentAboutBinding
 
     /**
+     * onCreate
+     * @param savedInstanceState Bundle?
+     */
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
+    /**
      * onCreateView
      * @param inflater LayoutInflater
      * @param container ViewGroup?
      * @param savedInstanceState Bundle?
      * @return View?
      */
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about, container, false)
         binding.lifecycleOwner = this@AboutFragment
 
         // Toolbar & Listener
-        initToolbar()
-        initListener()
-        initInfo()
+        configToolbar()
+        configListener()
+        configInformation()
 
-        return initBinding()
+        return configBinding()
+    }
+
+    /**
+     * onActivityCreated
+     * @param savedInstanceState Bundle?
+     */
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+    }
+
+    /**
+     * onViewCreated
+     * @param view View
+     * @param savedInstanceState Bundle?
+     */
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    /**
+     * onResume
+     */
+    override fun onResume() {
+        super.onResume()
+    }
+
+    /**
+     * onPause
+     */
+    override fun onPause() {
+        super.onPause()
+    }
+
+    /**
+     * onDestroyView
+     */
+    override fun onDestroyView() {
+        super.onDestroyView()
     }
 
     /**
@@ -55,30 +97,22 @@ class AboutFragment : Fragment(), View.OnClickListener {
             R.id.twt -> openTwitter()
             R.id.you -> openYoutube()
             R.id.git -> openGithub()
-            R.id.leg -> NavHostFragment.findNavController(this@AboutFragment).navigate(R.id.action_fabout_to_flegal)
+            R.id.leg -> NavHostFragment.findNavController(this@AboutFragment)
+                .navigate(R.id.action_fabout_to_flegal)
         }
     }
 
     /**
      * Iniciar el ViewModel
      */
-    private fun initBinding(): View {
+    private fun configBinding(): View {
         return binding.root
     }
 
     /**
-     * Information
-     */
-    private fun initInfo() {
-        val info = String.format("%s: v%s", getString(R.string.app_name), BuildConfig.VERSION_NAME)
-        binding.ctt.inf.text = info
-    }
-
-
-    /**
      *  Listener
      */
-    private fun initListener() {
+    private fun configListener() {
         binding.ctt.fbc.setOnClickListener(this)
         binding.ctt.ins.setOnClickListener(this)
         binding.ctt.twt.setOnClickListener(this)
@@ -88,11 +122,20 @@ class AboutFragment : Fragment(), View.OnClickListener {
     }
 
     /**
-     * initToolbar
+     * Information
      */
-    private fun initToolbar() {
+    private fun configInformation() {
+        val info = String.format("%s: v%s", getString(R.string.app_name), BuildConfig.VERSION_NAME)
+        binding.ctt.inf.text = info
+    }
+
+    /**
+     * configToolbar
+     */
+    private fun configToolbar() {
         binding.tlr.setNavigationOnClickListener {
-            NavHostFragment.findNavController(this).navigateUp()
+            NavHostFragment.findNavController(this)
+                .navigateUp()
         }
     }
 

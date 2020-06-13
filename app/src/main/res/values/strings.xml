@@ -37,6 +37,6 @@
     <string name="nav_drawer_close">close</string>
     <string name="nav_about">About Us</string>
     <string name="nav_settings">Settings</string>
-    <string name="nav_legal">Legal Warning</string>
+    <string name="nav_legal">Legal Information</string>
 
 </resources>

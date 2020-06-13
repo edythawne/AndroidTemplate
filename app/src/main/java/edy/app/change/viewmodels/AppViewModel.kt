@@ -12,6 +12,7 @@ class AppViewModel(val mState: SavedStateHandle) : ViewModel() {
     private val TAG: String = AppViewModel::class.java.name
 
     // LiveData
+    val internetAccess: MutableLiveData<Boolean> = MutableLiveData(false)
     private val topicData: MutableLiveData<ArrayList<TopicModel>> by lazy { MutableLiveData<ArrayList<TopicModel>>() }
 
     /**

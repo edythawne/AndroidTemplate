@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/fabout"
-        android:name="edy.app.change.settings.AboutFragment"
+        android:name="edy.app.change.views.settings.AboutFragment"
         android:label="@string/nav_about">
 
         <action

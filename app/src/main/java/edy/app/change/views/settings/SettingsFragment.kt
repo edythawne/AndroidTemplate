@@ -12,8 +12,7 @@ import androidx.preference.PreferenceManager
 import com.google.android.material.appbar.MaterialToolbar
 import edy.app.change.R
 
-class SettingsFragment : PreferenceFragmentCompat(),
-    SharedPreferences.OnSharedPreferenceChangeListener {
+class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     // TAG Variable
     private val TAG: String = SettingsFragment::class.java.name
@@ -22,7 +21,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
     private lateinit var preferences: SharedPreferences
 
     /**
-     * Estado en Resume
+     * onResume
      */
     override fun onResume() {
         super.onResume()
@@ -30,7 +29,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
     }
 
     /**
-     * Estado en Pausa
+     * onPause
      */
     override fun onPause() {
         super.onPause()
@@ -39,13 +38,13 @@ class SettingsFragment : PreferenceFragmentCompat(),
 
     /**
      * onCreatePreferences
-     *
      * @param savedInstanceState
      * @param rootKey
      */
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences_settings, rootKey)
-        initPreferences()
+        preferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        configPreferences()
     }
 
     /**
@@ -57,7 +56,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
         super.onViewCreated(view, savedInstanceState)
 
         // Toolbar Init
-        initToolbar(view)
+        configToolbar(view)
     }
 
     /**
@@ -66,9 +65,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         try {
             when (key) {
-                getString(R.string.key_pref_theme) -> preferenceAppThemeSelected(
-                    sharedPreferences!!
-                )
+                getString(R.string.key_pref_theme) -> changePrefTheme(sharedPreferences!!)
             }
         } catch (ex: Exception) {
             Log.d(TAG, "Exception has been occurred ${ex.localizedMessage}")
@@ -76,52 +73,39 @@ class SettingsFragment : PreferenceFragmentCompat(),
     }
 
     /**
-     * Iniciarlizar Preferencia
+     * configPreferences
      */
-    private fun initPreferences() {
-        preferences = PreferenceManager.getDefaultSharedPreferences(activity)
-
-        // Preference AppTheme
-        initPreferenceAppTheme(null)
+    private fun configPreferences() {
+        prefTheme(null)
     }
 
     /**
-     * Iniciar Preferencia de Tema
+     * Theme Preference
      */
-    private fun initPreferenceAppTheme(sharedPreferences: SharedPreferences?): String? {
-        var appThemePreferenceSelected: String? = null
-        val appThemePreferenceKey = getString(R.string.key_pref_theme)
-        val appThemePreference = findPreference<Preference>(appThemePreferenceKey)
-
-
-        appThemePreferenceSelected = if (sharedPreferences == null) {
-            preferences.getString(appThemePreferenceKey, "")
+    private fun prefTheme(shared: SharedPreferences?): String? {
+        val preference: Preference = findPreference(getString(R.string.key_pref_theme))!!
+        val item: String = if (shared == null) {
+            preferences.getString(getString(R.string.key_pref_theme), "")!!
         } else {
-            sharedPreferences.getString(appThemePreferenceKey, "")
+            shared.getString(getString(R.string.key_pref_theme), "")!!
         }
 
-        appThemePreference!!.summary = appThemePreferenceSelected
-        return appThemePreferenceSelected
+        preference.summary = item
+        return item
     }
 
     /**
-     * SetTheme
+     * changePrefTheme
+     * @param shared SharedPreferences
      */
-    private fun setTheme(mode: Int) {
-        AppCompatDelegate.setDefaultNightMode(mode)
-    }
+    private fun changePrefTheme(shared: SharedPreferences) {
+        val selected = prefTheme(shared)
+        val items = requireContext().resources.getStringArray(R.array.app_theme)
 
-    /**
-     * preferenceAppThemeSelected
-     */
-    private fun preferenceAppThemeSelected(sharedPreferences: SharedPreferences) {
-        val optionSelected = initPreferenceAppTheme(sharedPreferences)
-        val listAppTheme = requireContext().resources.getStringArray(R.array.app_theme)
-
-        when (optionSelected) {
-            listAppTheme[0] -> setTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            listAppTheme[1] -> setTheme(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY)
-            listAppTheme[2] -> setTheme(AppCompatDelegate.MODE_NIGHT_YES)
+        when (selected) {
+            items[0] -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            items[1] -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY)
+            items[2] -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
     }
 
@@ -129,10 +113,11 @@ class SettingsFragment : PreferenceFragmentCompat(),
      * initToolbar
      * @param view View
      */
-    private fun initToolbar(view: View) {
-        val toolbar: MaterialToolbar = view.findViewById(R.id.tlr)
-        toolbar.setNavigationOnClickListener {
-            NavHostFragment.findNavController(this).navigateUp()
-        }
+    private fun configToolbar(view: View) {
+        view.findViewById<MaterialToolbar>(R.id.tlr)
+            .setNavigationOnClickListener {
+                NavHostFragment.findNavController(this)
+                    .navigateUp()
+            }
     }
 }
