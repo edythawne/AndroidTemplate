@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/fhome">
 
     <fragment
         android:id="@+id/fhome"
         android:name="edy.app.change.views.fragments.HomeFragment"
-        android:label="@string/app_name">
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_home">
 
         <action
             android:id="@+id/action_fhome_to_fsettings"
             app:destination="@id/fsettings"
-            app:enterAnim="@anim/slide_up" />
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down" />
 
         <action
             android:id="@+id/action_fhome_to_fabout"
-            app:destination="@id/fabout" />
+            app:destination="@id/fabout"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
 
     </fragment>
 
@@ -24,12 +31,14 @@
     <fragment
         android:id="@+id/fsettings"
         android:name="edy.app.change.views.settings.SettingsFragment"
-        android:label="@string/nav_settings" />
+        android:label="@string/nav_settings"
+        tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/fabout"
         android:name="edy.app.change.views.settings.AboutFragment"
-        android:label="@string/nav_about">
+        android:label="@string/nav_about"
+        tools:layout="@layout/fragment_about">
 
         <action
             android:id="@+id/action_fabout_to_flegal"
@@ -41,6 +50,7 @@
     <fragment
         android:id="@+id/flegal"
         android:name="edy.app.change.views.settings.LegalFragment"
-        android:label="@string/nav_legal" />
+        android:label="@string/nav_legal"
+        tools:layout="@layout/fragment_legal" />
 
 </navigation>

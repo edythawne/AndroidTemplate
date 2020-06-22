@@ -10,7 +10,7 @@
 
         <variable
             name="h"
-            type="edy.app.change.adapters.base.HandlerAdapter" />
+            type="edy.app.change.adapters.list.HandlerAdapter" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat

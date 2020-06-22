@@ -42,9 +42,8 @@ class LegalFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_legal, container, false)
         binding.lifecycleOwner = this@LegalFragment
 
-        // Toolbar & WebView Call
-        configToolbar()
-        configWebView()
+        // WebView Call
+        configWebView(savedInstanceState)
 
         return configBinding()
     }
@@ -89,17 +88,6 @@ class LegalFragment : Fragment() {
     }
 
     /**
-     * initToolbar
-     */
-    private fun configToolbar() {
-        binding.tlr.setNavigationOnClickListener {
-            NavHostFragment.findNavController(this)
-                .navigateUp()
-        }
-    }
-
-
-    /**
      * configBinding
      * @return View
      */
@@ -126,7 +114,7 @@ class LegalFragment : Fragment() {
      * WebView
      */
     @SuppressLint("SetJavaScriptEnabled")
-    private fun configWebView() {
+    private fun configWebView(savedState: Bundle?) {
         val theme = ThemeAdapter.getNightModeStatus(requireContext())
 
         binding.web.apply {
@@ -138,7 +126,10 @@ class LegalFragment : Fragment() {
                     view?.loadUrl("javascript:setAppName('${getString(R.string.app_name)}')")
                 }
             }
-            loadUrl("file:///android_asset/legal/index.html")
+
+            if (savedState == null) {
+                loadUrl("file:///android_asset/legal/index.html")
+            }
         }
     }
 }

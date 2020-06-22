@@ -4,20 +4,29 @@ import edy.app.change.R
 import edy.app.change.adapters.base.BaseAdapter
 import edy.app.change.models.TopicModel
 
-class TopicAdapter(topicList: List<TopicModel>) : BaseAdapter() {
+class TopicAdapter() : BaseAdapter() {
 
     // TAG Variable
     private val TAG: String = TopicAdapter::class.java.name
 
     // Variables
-    private val list: List<TopicModel> = topicList
+    private var list: List<TopicModel>? = null
+
+    /**
+     * setTopics
+     * @param topicList List<TopicModel>
+     */
+    fun setTopics(topicList: List<TopicModel>) {
+        this.list = topicList
+        notifyDataSetChanged()
+    }
 
     /**
      * getObjForPosition
      * @position Int
      */
     override fun getObjForPosition(position: Int): Any {
-        return list[position]
+        return list!![position]
     }
 
     /**
@@ -34,7 +43,7 @@ class TopicAdapter(topicList: List<TopicModel>) : BaseAdapter() {
      * @return
      */
     override fun getItemCount(): Int {
-        return list.size
+        return list!!.size
     }
 
 }

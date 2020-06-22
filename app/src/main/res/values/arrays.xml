@@ -15,7 +15,7 @@
 
     <!-- Drawables -->
     <integer-array name="topics_src">
-        <item>@drawable/ic_about</item>
+        <item>@drawable/icon_about</item>
     </integer-array>
 
     <!-- Destination -->

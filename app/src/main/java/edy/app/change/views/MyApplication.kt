@@ -1,6 +1,7 @@
 package edy.app.change.views
 
 import android.content.SharedPreferences
+import android.os.Handler
 import androidx.multidex.MultiDexApplication
 import androidx.preference.PreferenceManager
 import edy.app.change.R
@@ -10,6 +11,9 @@ class MyApplication : MultiDexApplication() {
 
     // TAG Variables
     private val TAG: String = MyApplication::class.java.name
+
+    // Variables
+    private val handler: Handler by lazy { Handler() }
 
     /**
      * onCreate
@@ -24,13 +28,16 @@ class MyApplication : MultiDexApplication() {
      */
     private fun initTheme() {
         val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val listAppThemes = resources.getStringArray(R.array.app_theme)
+        val items = resources.getStringArray(R.array.app_theme)
+        var runnable: Runnable? = null
 
         when (preferences.getString(getString(R.string.key_pref_theme), "Default")!!) {
-            listAppThemes[0] -> ThemeAdapter.setNightMode(0)
-            listAppThemes[1] -> ThemeAdapter.setNightMode(1)
-            listAppThemes[2] -> ThemeAdapter.setNightMode(2)
+            items[0] -> runnable = ThemeAdapter.setNightMode(0)
+            items[1] -> runnable = ThemeAdapter.setNightMode(1)
+            items[2] -> runnable = ThemeAdapter.setNightMode(2)
         }
+
+        Handler().post(runnable)
     }
 
 }

@@ -41,7 +41,7 @@
 
     <!-- NavigationView Color -->
     <color name="colorNavigationPrimary">#EEEEEE</color>
-    <color name="colorNavigationControlHighlight">#4084FFFF</color>
+    <color name="colorNavigationControlHighlight">#33ffffff</color>
 
     <!-- CursorTextInputLayout -->
     <color name="colorHintText">#FAFAFA</color>

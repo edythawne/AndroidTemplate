@@ -7,7 +7,7 @@ import com.novoda.merlin.Connectable
 import com.novoda.merlin.Disconnectable
 import com.novoda.merlin.Merlin
 
-abstract class BaseApplication : AppCompatActivity() {
+abstract class ConnectionActivity : AppCompatActivity() {
 
     // Merlin Variable
     protected var merlin: Merlin? = null

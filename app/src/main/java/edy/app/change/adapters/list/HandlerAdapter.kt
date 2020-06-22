@@ -1,4 +1,4 @@
-package edy.app.change.adapters.base
+package edy.app.change.adapters.list
 
 import android.view.View
 import androidx.navigation.findNavController

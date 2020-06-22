@@ -40,8 +40,7 @@ class AboutFragment : Fragment(), View.OnClickListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about, container, false)
         binding.lifecycleOwner = this@AboutFragment
 
-        // Toolbar & Listener
-        configToolbar()
+        // config
         configListener()
         configInformation()
 
@@ -113,12 +112,12 @@ class AboutFragment : Fragment(), View.OnClickListener {
      *  Listener
      */
     private fun configListener() {
-        binding.ctt.fbc.setOnClickListener(this)
-        binding.ctt.ins.setOnClickListener(this)
-        binding.ctt.twt.setOnClickListener(this)
-        binding.ctt.git.setOnClickListener(this)
-        binding.ctt.you.setOnClickListener(this)
-        binding.ctt.leg.setOnClickListener(this)
+        binding.fbc.setOnClickListener(this)
+        binding.ins.setOnClickListener(this)
+        binding.twt.setOnClickListener(this)
+        binding.git.setOnClickListener(this)
+        binding.you.setOnClickListener(this)
+        binding.leg.setOnClickListener(this)
     }
 
     /**
@@ -126,17 +125,7 @@ class AboutFragment : Fragment(), View.OnClickListener {
      */
     private fun configInformation() {
         val info = String.format("%s: v%s", getString(R.string.app_name), BuildConfig.VERSION_NAME)
-        binding.ctt.inf.text = info
-    }
-
-    /**
-     * configToolbar
-     */
-    private fun configToolbar() {
-        binding.tlr.setNavigationOnClickListener {
-            NavHostFragment.findNavController(this)
-                .navigateUp()
-        }
+        binding.inf.text = info
     }
 
     /**

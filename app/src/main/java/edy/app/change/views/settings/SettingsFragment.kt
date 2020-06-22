@@ -2,15 +2,14 @@ package edy.app.change.views.settings
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
-import com.google.android.material.appbar.MaterialToolbar
 import edy.app.change.R
+import edy.app.change.adapters.ThemeAdapter
 
 class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -18,6 +17,7 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
     private val TAG: String = SettingsFragment::class.java.name
 
     // Variables
+    private val handler: Handler by lazy { Handler() }
     private lateinit var preferences: SharedPreferences
 
     /**
@@ -54,9 +54,6 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Toolbar Init
-        configToolbar(view)
     }
 
     /**
@@ -100,24 +97,16 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
      */
     private fun changePrefTheme(shared: SharedPreferences) {
         val selected = prefTheme(shared)
-        val items = requireContext().resources.getStringArray(R.array.app_theme)
+        val items = resources.getStringArray(R.array.app_theme)
+        var runnable: Runnable? = null
 
         when (selected) {
-            items[0] -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            items[1] -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY)
-            items[2] -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            items[0] -> runnable = ThemeAdapter.setNightMode(0)
+            items[1] -> runnable = ThemeAdapter.setNightMode(1)
+            items[2] -> runnable = ThemeAdapter.setNightMode(2)
         }
+
+        handler.post(runnable)
     }
 
-    /**
-     * initToolbar
-     * @param view View
-     */
-    private fun configToolbar(view: View) {
-        view.findViewById<MaterialToolbar>(R.id.tlr)
-            .setNavigationOnClickListener {
-                NavHostFragment.findNavController(this)
-                    .navigateUp()
-            }
-    }
 }

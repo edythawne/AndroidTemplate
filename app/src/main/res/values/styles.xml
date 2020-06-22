@@ -44,6 +44,7 @@
 
         <!-- Styles Add -->
         <item name="textInputStyle">@style/AppTheme.TextInputLayout</item>
+        <item name="colorControlHighlight">@color/colorNavigationControlHighlight</item>
 
         <!-- Dialog Theme -->
         <item name="alertDialogTheme">@style/AlertDialogTheme</item>

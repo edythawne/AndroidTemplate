@@ -1,13 +1,8 @@
 package edy.app.change.views.fragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
+import android.os.Handler
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -15,25 +10,29 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import edy.app.change.R
-import edy.app.change.adapters.list.GridLayoutAdapter
 import edy.app.change.adapters.list.TopicAdapter
 import edy.app.change.databinding.FragmentHomeBinding
 import edy.app.change.models.TopicModel
-import edy.app.change.utils.Keys
+import edy.app.change.utilities.Constants
+import edy.app.change.utilities.InjectorUtils
 import edy.app.change.viewmodels.AppViewModel
 
-class HomeFragment : Fragment(), Toolbar.OnMenuItemClickListener {
+class HomeFragment : Fragment() {
 
     // TAG
     private val TAG: String = HomeFragment::class.java.name
 
     // Variables
+    private val handler: Handler by lazy { Handler() }
     private lateinit var binding: FragmentHomeBinding
-    private val viewModel: AppViewModel by activityViewModels()
+    private val viewModel: AppViewModel by activityViewModels {
+        InjectorUtils.provideTopicsViewModelFactory(this)
+    }
 
     // Ads Variables
-    private var showInterstitial: Int = 0
-    //private lateinit var interstitial: AdsInterstitial
+    private var showingInterstitial: Int = 0
+    private var isShowInterstitial: Boolean = false
+    //private lateinit var interstitial: AdInterstitial
 
     /**
      * onCreate
@@ -55,9 +54,8 @@ class HomeFragment : Fragment(), Toolbar.OnMenuItemClickListener {
         binding.lifecycleOwner = this@HomeFragment
 
         // Components
-        configAdsInterstitial()
+        configAds()
         configConnection()
-        configToolbar()
         subscribe()
 
         return configBinding()
@@ -78,6 +76,7 @@ class HomeFragment : Fragment(), Toolbar.OnMenuItemClickListener {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        configToolbar()
     }
 
     /**
@@ -87,7 +86,8 @@ class HomeFragment : Fragment(), Toolbar.OnMenuItemClickListener {
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         savedInstanceState?.run {
-            showInterstitial = getInt(Keys.KEY_INTERSTITIAL_SHOWING, 0)
+            showingInterstitial = (getInt(Constants.KEY_INTERSTITIAL_SHOWING, 0) - 1)
+            isShowInterstitial = getBoolean(Constants.KEY_INTERSTITIAL_IS_SHOWING, false)
         }
     }
 
@@ -97,7 +97,8 @@ class HomeFragment : Fragment(), Toolbar.OnMenuItemClickListener {
      */
     override fun onSaveInstanceState(outState: Bundle) {
         outState.run {
-            putInt(Keys.KEY_INTERSTITIAL_SHOWING, showInterstitial)
+            putInt(Constants.KEY_INTERSTITIAL_SHOWING, showingInterstitial)
+            putBoolean(Constants.KEY_INTERSTITIAL_IS_SHOWING, isShowInterstitial)
         }
         super.onSaveInstanceState(outState)
     }
@@ -124,15 +125,34 @@ class HomeFragment : Fragment(), Toolbar.OnMenuItemClickListener {
     }
 
     /**
-     * initToolbar
+     * onCreateOptionsMenu
+     * @param menu Menu
+     * @param inflater MenuInflater
      */
-    private fun configToolbar() {
-        binding.tlr.setOnMenuItemClickListener(this)
-        setHasOptionsMenu(true)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_settings, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     /**
-     * Iniciar el ViewModel
+     * onOptionsItemSelected
+     * @param item MenuItem
+     * @return Boolean
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.item_setting -> {
+                NavHostFragment.findNavController(this)
+                    .navigate(R.id.action_fhome_to_fsettings)
+                true
+            }
+
+            else -> false
+        }
+    }
+
+    /**
+     * Binding
      */
     private fun configBinding(): View {
         binding.vm = viewModel
@@ -140,57 +160,44 @@ class HomeFragment : Fragment(), Toolbar.OnMenuItemClickListener {
     }
 
     /**
-     * onMenuItemClick
-     * @param item MenuItem
-     * @return Boolean
+     * Advertising
      */
-    override fun onMenuItemClick(item: MenuItem?): Boolean {
-        return when (item!!.itemId) {
-            R.id.item_setting -> {
-                NavHostFragment.findNavController(this)
-                    .navigate(R.id.action_fhome_to_fsettings)
-                true
-            }
-            else -> false
-        }
+    private fun configAds() {
+        /**interstitial = AdInterstitial.getInstance(requireContext(), getString(R.string.key_interstitial))
+
+        interstitial.showInterstitial.observe(viewLifecycleOwner, Observer {
+        isShowInterstitial = it
+        })**/
+    }
+
+    /**
+     * initToolbar
+     */
+    private fun configToolbar() {
+        setHasOptionsMenu(true)
     }
 
     /**
      * subscribe
      */
-    @SuppressLint("Recycle")
     private fun subscribe() {
-        try {
-            val list: ArrayList<TopicModel> = ArrayList()
-            val t = resources.getStringArray(R.array.topics)
-            val d = resources.getStringArray(R.array.topics_desc)
-            val s = resources.obtainTypedArray(R.array.topics_src)
-            val n = resources.obtainTypedArray(R.array.topics_destiny)
-
-            for (i in 0 until t.size) {
-                list.add(TopicModel(t[i], d[i], n.getResourceId(i, -1), -1, s.getDrawable(i)!!))
-            }
-
-            viewModel.getMldTopics(list).observe(viewLifecycleOwner, Observer {
-                configRecycler(it)
+        val adapter = TopicAdapter()
+        viewModel.getMldTopics()
+            .observe(viewLifecycleOwner, Observer {
+                configRecycler(it, adapter)
             })
-        } catch (ex: Exception) {
-            Log.w(TAG, "Subscribe : ${ex}")
-        }
     }
 
     /**
-     * configRecycler
+     * Config Recycler
      * @param topics ArrayList<TopicModel>
      */
-    private fun configRecycler(topics: ArrayList<TopicModel>) {
-        val ma = TopicAdapter(topics)
-        binding.ctt.tcs.apply {
-            layoutManager = GridLayoutAdapter(requireContext()).getGridLayoutManager()
+    private fun configRecycler(topics: ArrayList<TopicModel>, topicAdapter: TopicAdapter) {
+        topicAdapter.setTopics(topics)
+        binding.tcs.apply {
             itemAnimator = DefaultItemAnimator()
-            adapter = ma
+            adapter = topicAdapter
         }
-        ma.notifyDataSetChanged()
     }
 
     /**
@@ -208,10 +215,18 @@ class HomeFragment : Fragment(), Toolbar.OnMenuItemClickListener {
      * Config Interstitial
      */
     private fun configAdsInterstitial() {
-        if (showInterstitial <= Keys.INTERSTITIAL_ALLOW_SHOW) {
-            //interstitial.init()
+        /**try {
+        val r = Runnable {
+        if ((showingInterstitial % Constants.INTERSTITIAL_ALLOW_SHOW == 0) && (!isShowInterstitial)) {
+        interstitial.init()
         }
-        showInterstitial += 1
+        showingInterstitial += 1
+        }
+
+        handler.post(r)
+        } catch (ex: Exception) {
+        Log.w(TAG, "configInterstitial()[Error] : $ex")
+        } **/
     }
 
 }
