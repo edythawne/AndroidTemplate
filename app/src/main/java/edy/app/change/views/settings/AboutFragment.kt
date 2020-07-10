@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import edy.app.change.BuildConfig
@@ -18,7 +17,7 @@ class AboutFragment : Fragment(), View.OnClickListener {
     // TAG
     private val TAG: String = AboutFragment::class.java.name
 
-    // Variables
+    // Databinding Variables
     private lateinit var binding: FragmentAboutBinding
 
     /**
@@ -37,7 +36,7 @@ class AboutFragment : Fragment(), View.OnClickListener {
      * @return View?
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about, container, false)
+        binding = FragmentAboutBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this@AboutFragment
 
         // config
@@ -130,7 +129,6 @@ class AboutFragment : Fragment(), View.OnClickListener {
 
     /**
      * openTwitter
-     * @param view View
      */
     private fun openTwitter() {
         val uApp = Uri.parse("twitter://user?screen_name=arteaprogramar")
@@ -146,7 +144,6 @@ class AboutFragment : Fragment(), View.OnClickListener {
 
     /**
      * openFacebook
-     * @param view View
      */
     private fun openFacebook() {
         val uApp = Uri.parse("fb://page/104198717968351")
@@ -162,7 +159,6 @@ class AboutFragment : Fragment(), View.OnClickListener {
 
     /**
      * Open Instagram
-     * @param view View
      */
     private fun openInstagram() {
         val uApp = Uri.parse("https://instagram.com/_u/arteaprogramar")
@@ -179,7 +175,6 @@ class AboutFragment : Fragment(), View.OnClickListener {
 
     /**
      * Open Github
-     * @param view View
      */
     private fun openGithub() {
         val uApp = Uri.parse("https://github.com/arteaprogramar")
@@ -193,7 +188,6 @@ class AboutFragment : Fragment(), View.OnClickListener {
 
     /**
      * Open Github
-     * @param view View
      */
     private fun openYoutube() {
         val uApp = Uri.parse("vnd.youtube.com/channel/UCh94p1M7dg1y9f_Yik1vGjw")

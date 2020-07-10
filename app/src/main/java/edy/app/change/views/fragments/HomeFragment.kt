@@ -2,19 +2,19 @@ package edy.app.change.views.fragments
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.*
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import edy.app.change.R
-import edy.app.change.adapters.list.TopicAdapter
 import edy.app.change.databinding.FragmentHomeBinding
 import edy.app.change.models.TopicModel
 import edy.app.change.utilities.Constants
 import edy.app.change.utilities.InjectorUtils
+import edy.app.change.utilities.adapters.list.TopicAdapter
 import edy.app.change.viewmodels.AppViewModel
 
 class HomeFragment : Fragment() {
@@ -30,9 +30,11 @@ class HomeFragment : Fragment() {
     }
 
     // Ads Variables
-    private var showingInterstitial: Int = 0
-    private var isShowInterstitial: Boolean = false
     //private lateinit var interstitial: AdInterstitial
+
+    // Lifecycle
+    private var timesInterstitialShown: Int = -1
+    private var isInterstitialShown: Boolean = false
 
     /**
      * onCreate
@@ -50,12 +52,13 @@ class HomeFragment : Fragment() {
      * @return View?
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this@HomeFragment
 
         // Components
         configAds()
         configConnection()
+        configInstance(savedInstanceState)
         subscribe()
 
         return configBinding()
@@ -85,10 +88,6 @@ class HomeFragment : Fragment() {
      */
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
-        savedInstanceState?.run {
-            showingInterstitial = (getInt(Constants.KEY_INTERSTITIAL_SHOWING, 0) - 1)
-            isShowInterstitial = getBoolean(Constants.KEY_INTERSTITIAL_IS_SHOWING, false)
-        }
     }
 
     /**
@@ -97,8 +96,9 @@ class HomeFragment : Fragment() {
      */
     override fun onSaveInstanceState(outState: Bundle) {
         outState.run {
-            putInt(Constants.KEY_INTERSTITIAL_SHOWING, showingInterstitial)
-            putBoolean(Constants.KEY_INTERSTITIAL_IS_SHOWING, isShowInterstitial)
+            // Ads
+            putInt(Constants.KEY_INTERSTITIAL_SHOWING, timesInterstitialShown)
+            putBoolean(Constants.KEY_INTERSTITIAL_IS_SHOWING, isInterstitialShown)
         }
         super.onSaveInstanceState(outState)
     }
@@ -160,25 +160,69 @@ class HomeFragment : Fragment() {
     }
 
     /**
-     * Advertising
-     */
-    private fun configAds() {
-        /**interstitial = AdInterstitial.getInstance(requireContext(), getString(R.string.key_interstitial))
-
-        interstitial.showInterstitial.observe(viewLifecycleOwner, Observer {
-        isShowInterstitial = it
-        })**/
-    }
-
-    /**
-     * initToolbar
+     * Toolbar
      */
     private fun configToolbar() {
         setHasOptionsMenu(true)
     }
 
     /**
-     * subscribe
+     * OnConnected
+     */
+    private fun configConnection() {
+        viewModel.internetAccess.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                showAdInterstitial()
+            }
+        })
+    }
+
+    /**
+     * configInstance
+     * @param mState Bundle?
+     */
+    private fun configInstance(mState: Bundle?) {
+        if (mState != null) {
+            with(mState) {
+                // Ads
+                timesInterstitialShown = (getInt(Constants.KEY_INTERSTITIAL_SHOWING, 0))
+                isInterstitialShown = getBoolean(Constants.KEY_INTERSTITIAL_IS_SHOWING, false)
+            }
+        }
+    }
+
+    /**
+     * Advertising
+     */
+    private fun configAds() {
+        //interstitial = AdInterstitial.getInstance(requireContext(), "ca-app-pub-3940256099942544/1033173712")
+        //interstitial = AdInterstitial.getInstance(requireContext(), getString(R.string.key_interstitial))
+        /**
+        interstitial.showInterstitial.observe(viewLifecycleOwner, Observer { result ->
+        isInterstitialShown = result
+        })
+         **/
+    }
+
+    /**
+     * Config Interstitial
+     */
+    private fun showAdInterstitial() {
+        try {
+            val r = Runnable {
+                timesInterstitialShown += 1
+                if ((timesInterstitialShown % Constants.INTERSTITIAL_ALLOW_SHOW == 0)) {
+                    //interstitial.show()
+                }
+            }
+            handler.post(r)
+        } catch (ex: Exception) {
+            Log.w(TAG, "configInterstitial()[Error] : $ex")
+        }
+    }
+
+    /**
+     * Subscribe
      */
     private fun subscribe() {
         val adapter = TopicAdapter()
@@ -189,44 +233,15 @@ class HomeFragment : Fragment() {
     }
 
     /**
-     * Config Recycler
+     * initRecycler
      * @param topics ArrayList<TopicModel>
      */
-    private fun configRecycler(topics: ArrayList<TopicModel>, topicAdapter: TopicAdapter) {
+    private fun configRecycler(topics: List<TopicModel>, topicAdapter: TopicAdapter) {
         topicAdapter.setTopics(topics)
         binding.tcs.apply {
             itemAnimator = DefaultItemAnimator()
             adapter = topicAdapter
         }
-    }
-
-    /**
-     * configConnection
-     */
-    private fun configConnection() {
-        viewModel.internetAccess.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                configAdsInterstitial()
-            }
-        })
-    }
-
-    /**
-     * Config Interstitial
-     */
-    private fun configAdsInterstitial() {
-        /**try {
-        val r = Runnable {
-        if ((showingInterstitial % Constants.INTERSTITIAL_ALLOW_SHOW == 0) && (!isShowInterstitial)) {
-        interstitial.init()
-        }
-        showingInterstitial += 1
-        }
-
-        handler.post(r)
-        } catch (ex: Exception) {
-        Log.w(TAG, "configInterstitial()[Error] : $ex")
-        } **/
     }
 
 }

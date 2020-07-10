@@ -1,11 +1,11 @@
-package edy.app.change.adapters.base
+package edy.app.change.utilities.adapters.base
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import edy.app.change.adapters.list.BaseViewHolder
+import edy.app.change.utilities.adapters.list.BaseViewHolder
 
 abstract class BaseAdapter : RecyclerView.Adapter<BaseViewHolder>() {
 

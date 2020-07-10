@@ -1,4 +1,4 @@
-package edy.app.change.adapters
+package edy.app.change.utilities.adapters
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate

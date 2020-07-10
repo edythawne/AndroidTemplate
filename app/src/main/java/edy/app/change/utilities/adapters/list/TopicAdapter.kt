@@ -1,8 +1,8 @@
-package edy.app.change.adapters.list
+package edy.app.change.utilities.adapters.list
 
 import edy.app.change.R
-import edy.app.change.adapters.base.BaseAdapter
 import edy.app.change.models.TopicModel
+import edy.app.change.utilities.adapters.base.BaseAdapter
 
 class TopicAdapter() : BaseAdapter() {
 

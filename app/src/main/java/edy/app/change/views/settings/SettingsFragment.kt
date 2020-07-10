@@ -9,7 +9,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import edy.app.change.R
-import edy.app.change.adapters.ThemeAdapter
+import edy.app.change.utilities.adapters.ThemeAdapter
 
 class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -29,7 +29,7 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
     }
 
     /**
-     * onPause
+     * Estado en Pausa
      */
     override fun onPause() {
         super.onPause()
@@ -44,7 +44,7 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences_settings, rootKey)
         preferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        configPreferences()
+        initPreferences()
     }
 
     /**
@@ -57,7 +57,9 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
     }
 
     /**
-     * Ha ocurrido un cambio en las preferencias de la aplicacion
+     * onSharedPreferenceChanged
+     * @param sharedPreferences SharedPreferences
+     * @param key String
      */
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         try {
@@ -65,19 +67,20 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
                 getString(R.string.key_pref_theme) -> changePrefTheme(sharedPreferences!!)
             }
         } catch (ex: Exception) {
-            Log.d(TAG, "Exception has been occurred ${ex.localizedMessage}")
+            Log.d(TAG, "onSharedPreferenceChanged [Error]: $ex")
         }
     }
 
+
     /**
-     * configPreferences
+     * Preferences Init
      */
-    private fun configPreferences() {
+    private fun initPreferences() {
         prefTheme(null)
     }
 
     /**
-     * Theme Preference
+     * Theme Preferences Config
      */
     private fun prefTheme(shared: SharedPreferences?): String? {
         val preference: Preference = findPreference(getString(R.string.key_pref_theme))!!

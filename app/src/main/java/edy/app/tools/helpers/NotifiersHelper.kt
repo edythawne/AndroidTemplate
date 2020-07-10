@@ -38,12 +38,7 @@ object NotifiersHelper {
     /**
      * Generar SnackBar con Acción
      */
-    fun snackbarWithAction(
-        activity: Activity,
-        titleAction: String,
-        msg: String,
-        listener: View.OnClickListener
-    ) {
+    fun snackbarWithAction(activity: Activity, titleAction: String, msg: String, listener: View.OnClickListener) {
         getSnackBar(activity, msg, Snackbar.LENGTH_INDEFINITE).setAction(titleAction, listener)
             .show()
     }
@@ -59,8 +54,7 @@ object NotifiersHelper {
      * Create SnackBar
      */
     private fun getSnackBar(activity: Activity, msg: String, duration: Int): Snackbar {
-        val snackbar: Snackbar =
-            Snackbar.make(activity.findViewById(android.R.id.content), msg, duration)
+        val snackbar: Snackbar = Snackbar.make(activity.findViewById(android.R.id.content), msg, duration)
         //snackbar.view.setBackgroundColor(com.google.android.material.R.drawable.design_snackbar_background)
         snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
             .setTextColor(Color.WHITE)
@@ -75,17 +69,9 @@ object NotifiersHelper {
         this.view.layoutParams = params
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            this.view.background = ContextCompat.getDrawable(
-                context,
-                com.google.android.material.R.drawable.design_snackbar_background
-            )
+            this.view.background = ContextCompat.getDrawable(context, com.google.android.material.R.drawable.design_snackbar_background)
         } else {
-            this.view.setBackgroundDrawable(
-                ContextCompat.getDrawable(
-                    context,
-                    com.google.android.material.R.drawable.design_snackbar_background
-                )
-            )
+            this.view.setBackgroundDrawable(ContextCompat.getDrawable(context, com.google.android.material.R.drawable.design_snackbar_background))
         }
 
         ViewCompat.setElevation(this.view, 6f)

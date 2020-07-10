@@ -1,4 +1,4 @@
-package edy.app.change.adapters.list
+package edy.app.change.utilities.adapters.list
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView

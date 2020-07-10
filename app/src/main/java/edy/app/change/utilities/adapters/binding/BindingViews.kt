@@ -1,4 +1,4 @@
-package edy.app.change.adapters.binding
+package edy.app.change.utilities.adapters.binding
 
 import android.graphics.drawable.Drawable
 import android.text.Editable
@@ -24,13 +24,17 @@ import com.google.android.material.textfield.TextInputLayout
  */
 @BindingAdapter("resourceImage")
 fun loadImage(imageView: ImageView, source: Drawable) {
-    Glide.with(imageView.context).load(source).transform(CenterInside(), RoundedCorners(24))
+    Glide.with(imageView.context)
+        .load(source)
+        .transform(CenterInside(), RoundedCorners(24))
         .into(imageView)
 }
 
 @BindingAdapter("resourceImage")
 fun loadImage(imageView: ImageView, source: Int) {
-    Glide.with(imageView.context).load(source).transform(CenterInside(), RoundedCorners(24))
+    Glide.with(imageView.context)
+        .load(source)
+        .transform(CenterInside(), RoundedCorners(24))
         .into(imageView)
 }
 
@@ -44,7 +48,9 @@ fun loadImage(imageView: ImageView, source: Int) {
 fun setTextWatcher(til: TextInputLayout, error: String) {
     til.editText!!.addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
-            if (s.toString().trim { it <= ' ' }.isEmpty()) {
+            if (s.toString()
+                    .trim { it <= ' ' }
+                    .isEmpty()) {
                 til.error = error
             } else {
                 til.isErrorEnabled = false
@@ -61,15 +67,10 @@ fun setTextWatcher(til: TextInputLayout, error: String) {
     })
 }
 
-@BindingAdapter(
-    value = ["selected_value", "selected_value_changed"
-        /**, "flex_layout"**/
-    ], requireAll = false
-)
-fun setSpinnerValue(
-    spinner: AppCompatSpinner,
-    newSelectedValue: String,
-    newTextAttr: InverseBindingListener
+@BindingAdapter(value = ["selected_value", "selected_value_changed"
+    /**, "flex_layout"**/
+], requireAll = false)
+fun setSpinnerValue(spinner: AppCompatSpinner, newSelectedValue: String, newTextAttr: InverseBindingListener
     /**, fl: FlexboxLayout**/
 ) {
     spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

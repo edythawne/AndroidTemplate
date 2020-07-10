@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.addCallback
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import edy.app.change.R
-import edy.app.change.adapters.ThemeAdapter
 import edy.app.change.databinding.FragmentLegalBinding
+import edy.app.change.utilities.adapters.ThemeAdapter
 import edy.app.tools.helpers.WebViewHelper
 
 class LegalFragment : Fragment() {
@@ -39,7 +38,7 @@ class LegalFragment : Fragment() {
      * @return View?
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_legal, container, false)
+        binding = FragmentLegalBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this@LegalFragment
 
         // WebView Call
@@ -67,6 +66,28 @@ class LegalFragment : Fragment() {
     }
 
     /**
+     * onViewStateRestored
+     * @param savedInstanceState Bundle?
+     */
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        savedInstanceState?.run {
+            binding.web.restoreState(this)
+        }
+    }
+
+    /**
+     * onSaveInstanceState
+     * @param outState Bundle
+     */
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.run {
+            binding.web.saveState(outState)
+        }
+        super.onSaveInstanceState(outState)
+    }
+
+    /**
      * onResume
      */
     override fun onResume() {
@@ -88,14 +109,6 @@ class LegalFragment : Fragment() {
     }
 
     /**
-     * configBinding
-     * @return View
-     */
-    private fun configBinding(): View {
-        return binding.root
-    }
-
-    /**
      * onBackPressed
      */
     private fun onBackPressed() {
@@ -111,6 +124,14 @@ class LegalFragment : Fragment() {
     }
 
     /**
+     * Binding
+     * @return View
+     */
+    private fun configBinding(): View {
+        return binding.root
+    }
+
+    /**
      * WebView
      */
     @SuppressLint("SetJavaScriptEnabled")
@@ -122,7 +143,7 @@ class LegalFragment : Fragment() {
             webViewClient = object : WebViewClient() {
                 override fun onPageFinished(view: WebView?, url: String?) {
                     super.onPageFinished(view, url)
-                    view?.loadUrl("javascript:setTheme('$theme')")
+                    view?.loadUrl("javascript:setTheme('${theme}')")
                     view?.loadUrl("javascript:setAppName('${getString(R.string.app_name)}')")
                 }
             }

@@ -10,7 +10,7 @@
 
         <variable
             name="h"
-            type="edy.app.change.adapters.list.HandlerAdapter" />
+            type="edy.app.change.utilities.adapters.list.HandlerAdapter" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -23,18 +23,18 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/gutter_vertical">
+            android:layout_margin="@dimen/gutter_vertical"
+            android:orientation="vertical">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/isec"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_marginEnd="@dimen/gutter_vertical"
-                android:layout_marginRight="@dimen/gutter_vertical"
                 android:layout_marginStart="@dimen/gutter_vertical"
                 android:layout_marginLeft="@dimen/gutter_vertical"
+                android:layout_marginEnd="@dimen/gutter_vertical"
+                android:layout_marginRight="@dimen/gutter_vertical"
                 android:layout_toStartOf="@id/iimg"
                 android:layout_toLeftOf="@id/iimg"
                 android:orientation="vertical">

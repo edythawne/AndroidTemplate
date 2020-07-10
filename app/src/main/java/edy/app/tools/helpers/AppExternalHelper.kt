@@ -18,19 +18,9 @@ object AppExternalHelper {
      */
     fun searchOnPlayStore(context: Context, packageName: String) {
         try {
-            context.startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("market://details?id=${packageName}")
-                )
-            )
+            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${packageName}")))
         } catch (ex: ActivityNotFoundException) {
-            context.startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("https://play.google.com/store/apps/details?id=${packageName}")
-                )
-            )
+            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=${packageName}")))
         }
     }
 

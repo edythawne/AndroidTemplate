@@ -38,7 +38,6 @@ class TopicRepository private constructor(private val context: Context) {
         }
 
         live.postValue(list)
-
         return live
     }
 

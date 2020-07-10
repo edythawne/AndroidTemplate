@@ -1,4 +1,4 @@
-package edy.app.change.adapters.list
+package edy.app.change.utilities.adapters.list
 
 import android.view.View
 import androidx.navigation.findNavController
@@ -12,7 +12,8 @@ class HandlerAdapter {
      */
     fun navigate(v: View, d: Int) {
         if (d != -1) {
-            v.findNavController().navigate(d)
+            v.findNavController()
+                .navigate(d)
         }
     }
 }

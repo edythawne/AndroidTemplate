@@ -1,4 +1,4 @@
-package edy.app.change.adapters.base
+package edy.app.change.utilities.adapters.base
 
 import android.view.View
 import androidx.databinding.DataBindingUtil

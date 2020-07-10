@@ -73,8 +73,6 @@ class MainActivity : ConnectionActivity(), NavController.OnDestinationChangedLis
         registerBindable(this)
         registerConnectable(this)
         registerDisconnectable(this)
-
-        //banner.adView.resume()
     }
 
     /**
@@ -138,7 +136,6 @@ class MainActivity : ConnectionActivity(), NavController.OnDestinationChangedLis
      * Sin acceso a internet
      */
     override fun onDisconnect() {
-        viewModel.internetAccess.postValue(false)
         onDisconnectMessage()
     }
 
@@ -170,8 +167,10 @@ class MainActivity : ConnectionActivity(), NavController.OnDestinationChangedLis
      * configAdView
      */
     private fun configAdView() {
-        /**val r = Runnable {
-        banner.createAdView(getString(com.novoda.merlin.R.string.key_adview))
+        /**
+        val r = Runnable {
+        //banner.createAdView("ca-app-pub-3940256099942544/6300978111")
+        banner.createAdView(getString(R.string.key_adview))
         binding.ctt.ads.post {
         binding.ctt.ads.apply {
         removeAllViews()
@@ -181,7 +180,8 @@ class MainActivity : ConnectionActivity(), NavController.OnDestinationChangedLis
         }
         }
 
-        handler.post(r) **/
+        handler.post(r)
+         **/
     }
 
     /**
@@ -190,6 +190,7 @@ class MainActivity : ConnectionActivity(), NavController.OnDestinationChangedLis
     private fun onDisconnectMessage() {
         try {
             val r = Runnable {
+                viewModel.internetAccess.postValue(false)
                 NotifiersHelper.snackbar(this, getString(R.string.internet_not_access), NotifiersHelper.SNACK_LENGTH_LONG)
             }
             runOnUiThread(r)

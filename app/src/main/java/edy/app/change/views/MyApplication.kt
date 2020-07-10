@@ -5,7 +5,7 @@ import android.os.Handler
 import androidx.multidex.MultiDexApplication
 import androidx.preference.PreferenceManager
 import edy.app.change.R
-import edy.app.change.adapters.ThemeAdapter
+import edy.app.change.utilities.adapters.ThemeAdapter
 
 class MyApplication : MultiDexApplication() {
 
@@ -20,13 +20,13 @@ class MyApplication : MultiDexApplication() {
      */
     override fun onCreate() {
         super.onCreate()
-        initTheme()
+        configTheme()
     }
 
     /**
      * InitTheme
      */
-    private fun initTheme() {
+    private fun configTheme() {
         val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val items = resources.getStringArray(R.array.app_theme)
         var runnable: Runnable? = null
